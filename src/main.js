@@ -9,8 +9,9 @@ import Link from "@mui/material/Link"
 import Button from "@mui/material/Button"
 import Container from "@mui/material/Container"
 import Stack from "@mui/material/Stack"
-import { Grid } from "@mui/material"
-// import Image2 from "./img/image2.jpg"
+import { Card, Grid } from "@mui/material"
+import CardMedia from "@mui/material/CardMedia"
+import Image from "./img/spoti.png"
 
 function Copyright() {
   return (
@@ -85,33 +86,19 @@ function App2() {
         </Box>
 
         <div className="content_main">
-          <Container sx={{ py: 8 }} maxWidth="md">
+          <Container sx={{ py: 1 }} maxWidth="md">
             {/* End hero unit */}
-            <Grid container spacing={4} flexDirection="column">
+            <Grid container spacing={0} flexDirection="column">
               <Grid item xs={12} sm={12} md={12}>
-                {/* <img
-                  src={Image2}
-                  alt="ok"
-                  style={{ backgroundSize: "contain" }}
-                /> */}
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <CardMedia component="img" image={Image} alt="spotify" />
+                </Card>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
                 enim ad minim veniam, quis nostrud exercitation ullamco laboris
