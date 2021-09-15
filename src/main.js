@@ -9,7 +9,9 @@ import Link from "@mui/material/Link"
 import Button from "@mui/material/Button"
 import Container from "@mui/material/Container"
 import Stack from "@mui/material/Stack"
-
+import { Grid } from "@mui/material"
+import Image from "./img/image2.jpg"
+// Import using relative path
 function Copyright() {
   return (
     <Typography variant="body2" color="white" align="center">
@@ -20,6 +22,13 @@ function Copyright() {
       {new Date().getFullYear()}.
     </Typography>
   )
+}
+
+const styles = {
+  paperContainer: {
+    backgroundImage: `url(${Image})`,
+    height: "400px",
+  },
 }
 
 function App2() {
@@ -79,7 +88,16 @@ function App2() {
           </Container>
         </Box>
 
-        <div className="content_main">_</div>
+        <div className="content_main">
+          <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item xs={12} style={styles.paperContainer} />
+          </Grid>
+        </div>
       </div>
       {/* Footer */}
       <div className="footer">
