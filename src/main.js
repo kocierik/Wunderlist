@@ -86,26 +86,35 @@ function App2() {
         </Box>
 
         <div className="content_main">
-          <Container sx={{ py: 1 }} maxWidth="md">
+          <Container sx={{ py: 1 }}>
             {/* End hero unit */}
-            <Grid container spacing={0} flexDirection="column">
+            <Grid spacing={0} flexDirection="column">
+              <Box sx={{ padding: 0 }}>
+                <div className="content_info">
+                  <ul>
+                    <li> Get all stats from your spotify account</li>
+                    <li> Discover new music</li>
+                    <li> Share with your friends</li>
+                    <li> Enter in the leaderboard of the best listener</li>
+                  </ul>
+                </div>
+              </Box>
               <Grid item xs={12} sm={12} md={12}>
                 <Card
                   sx={{
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
+                    borderRadius: "20px",
                   }}
                 >
-                  <CardMedia component="img" image={Image} alt="spotify" />
+                  <CardMedia
+                    style={{ filter: "blur(1px)", borderRadius: "15px" }}
+                    component="img"
+                    image={Image}
+                    alt="spotify"
+                  />
                 </Card>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
               </Grid>
             </Grid>
           </Container>

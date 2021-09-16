@@ -86,3 +86,13 @@ html, body, #root{
   flex: 0 1 auto;
   flex-direction: column;
 }
+
+.content_info{
+  display: flex;
+  flex: 1 0 auto;
+  font-size: 20px;
+  padding:8px
+}
+li{
+  padding: 8px;
+}
