@@ -16,7 +16,7 @@ function footer() {
   return (
     <div>
       <div className="footer">
-        <Box sx={{ p: 5 }} component="footer">
+        <Box sx={{ p: 5, bgcolor: "black" }} component="footer">
           <Typography variant="h6" align="center" color="white" gutterBottom />
           <Typography
             variant="subtitle1"

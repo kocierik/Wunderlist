@@ -35,7 +35,12 @@ function info() {
                     color: "white",
                   }}
                 >
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography
+                    gutterBottom
+                    variant="h5"
+                    component="h2"
+                    color="#1976d2"
+                  >
                     {card.title}
                   </Typography>
                   <Typography sx={{ fontStyle: "italic" }}>
