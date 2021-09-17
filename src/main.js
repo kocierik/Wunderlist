@@ -1,5 +1,5 @@
 import React from "react"
-import "./App.scss"
+import "./style/main.scss"
 import AppBar from "@mui/material/AppBar"
 import Home from "@mui/icons-material/Home"
 import Typography from "@mui/material/Typography"
@@ -10,8 +10,7 @@ import Button from "@mui/material/Button"
 import Container from "@mui/material/Container"
 import Stack from "@mui/material/Stack"
 import { Card, CardActions, CardContent, Grid } from "@mui/material"
-import CardMedia from "@mui/material/CardMedia"
-import Image from "./img/spoti.png"
+import Cardinfo from "./cardInfo"
 
 function Copyright() {
   return (
@@ -24,8 +23,6 @@ function Copyright() {
     </Typography>
   )
 }
-
-const cards = [1, 2, 3, 4]
 
 function App2() {
   return (
@@ -91,28 +88,32 @@ function App2() {
           <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {cards.map((card) => (
+              {Cardinfo.map((card) => (
                 <Grid item key={card} xs={12} sm={12} md={12}>
                   <Card
                     sx={{
                       height: "100%",
                       display: "flex",
-                      flexDirection: "column",
+                      flexDirection: "row",
+                      borderRadius: "0px",
                     }}
                   >
-                    <CardMedia component="img" image={Image} alt="random" />
-                    <CardContent sx={{ flexGrow: 1 }}>
+                    <CardContent
+                      sx={{
+                        flex: "1 0 auto",
+                        bgcolor: "#181212",
+                        color: "white",
+                      }}
+                    >
                       <Typography gutterBottom variant="h5" component="h2">
-                        Heading
+                        {card.title}
                       </Typography>
-                      <Typography>
-                        This is a media card. You can use this section to
-                        describe the content.
+                      <Typography sx={{ fontStyle: "italic" }}>
+                        {card.text}
                       </Typography>
                     </CardContent>
-                    <CardActions>
-                      <Button size="small">View</Button>
-                      <Button size="small">Edit</Button>
+                    <CardActions sx={{ flex: "0 1 20%", bgcolor: "#181212" }}>
+                      <Button size="large">View</Button>
                     </CardActions>
                   </Card>
                 </Grid>

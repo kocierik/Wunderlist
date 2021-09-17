@@ -1,7 +1,7 @@
 html, body, #root{
   height: 100%;
   width: 100%;
-  background-color: #181212;
+  background-color: black;
 }
 
 .container{ 
@@ -10,7 +10,7 @@ html, body, #root{
   flex: 1 1 auto;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   flex-direction: column;
-  background-image: url(./img/image.jpeg);
+  background-image: url(../img/image.jpeg);
   background-size: contain;
   background-size: 100% 100%;
 }
@@ -85,14 +85,14 @@ html, body, #root{
   display: flex;
   flex: 0 1 auto;
   flex-direction: column;
+  background-size: contain;
+  background-size: 100% 100%;
+  background-image: url("../img/img.jpg"); 
 }
 
 .content_info{
   display: flex;
   flex: 1 0 auto;
   font-size: 20px;
-  padding:8px
-}
-li{
-  padding: 8px;
+  padding:8px;
 }
