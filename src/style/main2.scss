@@ -1,0 +1,38 @@
+html, body, #root{
+  height: 100%;
+  width: 100%;
+  background-color: black;
+}
+
+
+
+
+.makeTitle{
+  display: flex;  
+  flex-direction: column;
+}
+.title{
+  display: flex;  
+  font-size: 30px;
+  justify-content: center;
+}
+.underTitle{
+  color: white;
+  font-style: italic;
+  flex: 1 0  10%;
+  justify-content: center;
+}
+
+.content_title{
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+}
+
+.footer{
+  display: flex;
+  justify-content: center;
+}
+
+
+
