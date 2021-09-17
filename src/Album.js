@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import Link from "@mui/material/Link"
 import { createTheme, ThemeProvider } from "@mui/material/styles"
+import { Grid } from "@mui/material"
 
 function Copyright() {
   return (
@@ -74,6 +75,41 @@ export default function Album() {
               <Button variant="outlined">sign in</Button>
             </Stack>
           </Container>
+          {/* AAAAAAAAAAAAAAAAAAAAAA */}
+          <Container sx={{ py: 1 }}>
+            {/* End hero unit */}
+            <Grid spacing={0} flexDirection="column">
+              <Box sx={{ padding: 0 }}>
+                <div className="content_info">
+                  <ul>
+                    <li> Get all stats from your spotify account</li>
+                    <li> Discover new music</li>
+                    <li> Share with your friends</li>
+                    <li> Enter in the leaderboard of the best listener</li>
+                  </ul>
+                </div>
+              </Box>
+              <Grid item xs={12} sm={12} md={12}>
+                <Card
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    borderRadius: "20px",
+                  }}
+                >
+                  <CardMedia
+                    style={{ filter: "blur(1px)", borderRadius: "15px" }}
+                    component="img"
+                    image={Image}
+                    alt="spotify"
+                  />
+                </Card>
+              </Grid>
+            </Grid>
+          </Container>
+
+          {/* AAAAAAAAAAAAAAAAAAAAAA */}
         </Box>
         <Container maxWidth="xl" sx={{ py: 10, bgcolor: "#111D4A" }} />
       </main>

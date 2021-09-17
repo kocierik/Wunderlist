@@ -9,7 +9,7 @@ import Link from "@mui/material/Link"
 import Button from "@mui/material/Button"
 import Container from "@mui/material/Container"
 import Stack from "@mui/material/Stack"
-import { Card, Grid } from "@mui/material"
+import { Card, CardActions, CardContent, Grid } from "@mui/material"
 import CardMedia from "@mui/material/CardMedia"
 import Image from "./img/spoti.png"
 
@@ -24,6 +24,8 @@ function Copyright() {
     </Typography>
   )
 }
+
+const cards = [1, 2, 3, 4]
 
 function App2() {
   return (
@@ -86,36 +88,35 @@ function App2() {
         </Box>
 
         <div className="content_main">
-          <Container sx={{ py: 1 }}>
+          <Container sx={{ py: 8 }} maxWidth="md">
             {/* End hero unit */}
-            <Grid spacing={0} flexDirection="column">
-              <Box sx={{ padding: 0 }}>
-                <div className="content_info">
-                  <ul>
-                    <li> Get all stats from your spotify account</li>
-                    <li> Discover new music</li>
-                    <li> Share with your friends</li>
-                    <li> Enter in the leaderboard of the best listener</li>
-                  </ul>
-                </div>
-              </Box>
-              <Grid item xs={12} sm={12} md={12}>
-                <Card
-                  sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: "20px",
-                  }}
-                >
-                  <CardMedia
-                    style={{ filter: "blur(1px)", borderRadius: "15px" }}
-                    component="img"
-                    image={Image}
-                    alt="spotify"
-                  />
-                </Card>
-              </Grid>
+            <Grid container spacing={4}>
+              {cards.map((card) => (
+                <Grid item key={card} xs={12} sm={12} md={12}>
+                  <Card
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
+                  >
+                    <CardMedia component="img" image={Image} alt="random" />
+                    <CardContent sx={{ flexGrow: 1 }}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        Heading
+                      </Typography>
+                      <Typography>
+                        This is a media card. You can use this section to
+                        describe the content.
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small">View</Button>
+                      <Button size="small">Edit</Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
           </Container>
         </div>
