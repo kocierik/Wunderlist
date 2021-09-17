@@ -1,8 +1,8 @@
 import Home from "@mui/icons-material/Home"
 import { AppBar, Toolbar, Typography } from "@mui/material"
 import "../style/header.scss"
-import React from "react"
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function header() {
   return (
     <div className="header">

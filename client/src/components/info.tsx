@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 import {
   Button,
   Card,
@@ -7,18 +8,19 @@ import {
   Grid,
   Typography,
 } from "@mui/material"
-import React from "react"
+// eslint-disable-next-line import/no-unresolved
 import CardInfo from "./cardInfo"
 import "../style/info.scss"
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 function info() {
   return (
     <div className="content_info">
       <Container sx={{ py: 8 }} maxWidth="md">
-        {/* End hero unit */}
         <Grid container spacing={4}>
+          {/*  eslint-disable-next-line @typescript-eslint/ban-types */}
           {CardInfo.map((card) => (
-            <Grid item key={card} xs={12} sm={12} md={12}>
+            <Grid item key={card.id} xs={12} sm={12} md={12}>
               <Card
                 sx={{
                   height: "100%",
@@ -64,5 +66,4 @@ function info() {
     </div>
   )
 }
-//
 export default info

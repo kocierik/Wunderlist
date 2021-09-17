@@ -1,12 +1,13 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-console */
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { Button } from "@mui/material"
 
 const PLAYLIST_ENDPOINT = "https://api.spotify.com/v1/me/playlists"
 
-function visualizeData() {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const visualizeData = () => {
   const [token, setToken] = useState("")
   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState({})
@@ -23,12 +24,9 @@ function visualizeData() {
           Authorizazion: `Bearer ${token}`,
         },
       })
-      .then(
-        (response) => {
-          setData(response.data)
-        },
-        { mode: "cors" }
-      )
+      .then((response) => {
+        setData(response.data)
+      })
       .catch((error) => {
         console.error()
         console.log(error)
@@ -36,11 +34,7 @@ function visualizeData() {
     console.log(data)
   }
 
-  return (
-    <>
-      <Button onClick={handleTrack}>get Artist</Button>
-    </>
-  )
+  return <Button onClick={handleTrack}>get Artist</Button>
 }
 
 export default visualizeData

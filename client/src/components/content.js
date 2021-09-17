@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import "../style/content.scss"
 import VisualizeData from "./visualizeData"
 
@@ -30,7 +30,8 @@ const gerReturnedParamsFromSpotifyAuth = (hash) => {
 const handleLogin = () => {
   window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
 }
-function content() {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const content = () => {
   useEffect(() => {
     if (window.location.hash) {
       // eslint-disable-next-line no-unused-vars
@@ -42,7 +43,6 @@ function content() {
       localStorage.setItem("expiresIn", auth.expires_in)
     }
   })
-
   return (
     <div className="content">
       <Box
