@@ -25,6 +25,7 @@ function info() {
                   display: "flex",
                   flexDirection: "row",
                   borderRadius: "0px",
+                  boxShadow: "20px 5px 15px 5px #000000",
                 }}
               >
                 <CardContent
