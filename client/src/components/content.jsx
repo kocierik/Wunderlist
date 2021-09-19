@@ -1,11 +1,9 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import "../style/content.scss"
 
-const ciao = process.env
-console.log(ciao)
 const { REACT_APP_CLIENT_ID } = process.env
 const { REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT } = process.env
 const { REACT_APP_REDIRECT_URL_AFTER_LOGIN } = process.env
@@ -29,11 +27,21 @@ const gerReturnedParamsFromSpotifyAuth = (hash) => {
   return paramSplitUp
 }
 
-const handleLogin = () => {
-  window.location = `${REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
-}
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const content = () => {
+  const [sign, onSign] = useState(true)
+
+  const handleLogin = () => {
+    // eslint-disable-next-line no-unused-expressions
+    if (sign) {
+      localStorage.clear()
+      onSign(false)
+    } else {
+      onSign(true)
+      window.location = `${REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
+    }
+  }
+
   useEffect(() => {
     if (window.location.hash) {
       // eslint-disable-next-line no-unused-vars
@@ -44,7 +52,7 @@ const content = () => {
       localStorage.setItem("tokenType", auth.token_type)
       localStorage.setItem("expiresIn", auth.expires_in)
     }
-  })
+  }, [])
   return (
     <div className="content">
       <Box
@@ -87,7 +95,7 @@ const content = () => {
               sx={{ bgcolor: "#1DB954" }}
               onClick={handleLogin}
             >
-              sign up with spotify
+              {sign ? "log out" : "sign up with spotify"}
             </Button>
           </Stack>
         </Container>
