@@ -3,7 +3,6 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
 import { useEffect } from "react"
 import "../style/content.scss"
-import VisualizeData from "./visualizeData"
 
 const ciao = process.env
 console.log(ciao)
@@ -82,10 +81,14 @@ const content = () => {
             spacing={3}
             justifyContent="center"
           >
-            <Button variant="contained" bgcolor="white" onClick={handleLogin}>
-              sign up
+            <Button
+              variant="contained"
+              bgcolor="white"
+              sx={{ bgcolor: "#1DB954" }}
+              onClick={handleLogin}
+            >
+              sign up with spotify
             </Button>
-            <VisualizeData />
           </Stack>
         </Container>
       </Box>

@@ -15,7 +15,7 @@ const CardInfo: Card[] = [
   {
     id: 4,
     title: "Leaderboard",
-    text: "best listener",
+    text: "best listened music",
   },
 ]
 
