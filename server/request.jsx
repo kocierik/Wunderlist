@@ -1,5 +1,8 @@
+require('dotenv').config()
+
 const SpotifyWebApi = require("spotify-web-api-node")
 const express = require("express")
+var cors = require('cors')
 
 const scopes = [
   "ugc-image-upload",
@@ -23,16 +26,24 @@ const scopes = [
   "user-follow-modify",
 ]
 
+
 const spotifyApi = new SpotifyWebApi({
-  redirectUri: "http://localhost:8888/callback",
-  clientId: "e198f93827f7494e8a03dad4472ea626",
-  clientSecret: "78d98db5bc534d6db7772534dfec9fd5",
+  redirectUri: process.env.REDIRECT_URI,
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
 })
 
 const app = express()
+app.use(cors())
 
 app.get("/login", (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes))
+})
+
+app.get("/artist", async (req, res) => {
+  const artist = await spotifyApi.getMyCurrentPlayingTrack()
+  console.log("artist", artist)
+  res.send(artist)
 })
 
 app.get("/callback", (req, res) => {
@@ -79,8 +90,13 @@ app.get("/callback", (req, res) => {
     })
 })
 
+
+
 app.listen(8888, () =>
   console.log(
     "HTTP Server up. Now go to http://localhost:8888/login in your browser."
   )
 )
+
+
+

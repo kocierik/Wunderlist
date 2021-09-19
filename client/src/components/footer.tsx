@@ -1,18 +1,17 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Box, Link, Typography } from "@mui/material"
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="white" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://kocierik.netlify.app/">
+        kocierik
+      </Link>{" "}
+      {new Date().getFullYear()}.
+    </Typography>
+  )
+}
 function footer() {
-  function Copyright() {
-    return (
-      <Typography variant="body2" color="white" align="center">
-        {"Copyright © "}
-        <Link color="inherit" href="https://kocierik.netlify.app/">
-          kocierik
-        </Link>{" "}
-        {new Date().getFullYear()}.
-      </Typography>
-    )
-  }
   return (
     <div>
       <div className="footer">

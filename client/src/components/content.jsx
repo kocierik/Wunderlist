@@ -1,12 +1,17 @@
+/* eslint-disable no-console */
 /* eslint-disable no-undef */
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
 import { useEffect } from "react"
 import "../style/content.scss"
 import VisualizeData from "./visualizeData"
 
-const CLIENT_ID = "e198f93827f7494e8a03dad4472ea626"
-const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize"
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:3000/"
+const ciao = process.env
+console.log(ciao)
+// eslint-disable-next-line no-debugger
+debugger
+const { REACT_APP_CLIENT_ID } = process.env
+const { REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT } = process.env
+const { REACT_APP_REDIRECT_URL_AFTER_LOGIN } = process.env
 
 const SCOPES = [
   "user-read-currently-playing",
@@ -28,7 +33,7 @@ const gerReturnedParamsFromSpotifyAuth = (hash) => {
 }
 
 const handleLogin = () => {
-  window.location = `${SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
+  window.location = `${REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
 }
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const content = () => {
