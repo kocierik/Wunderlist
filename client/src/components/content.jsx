@@ -7,8 +7,6 @@ import VisualizeData from "./visualizeData"
 
 const ciao = process.env
 console.log(ciao)
-// eslint-disable-next-line no-debugger
-debugger
 const { REACT_APP_CLIENT_ID } = process.env
 const { REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT } = process.env
 const { REACT_APP_REDIRECT_URL_AFTER_LOGIN } = process.env
