@@ -1,21 +1,30 @@
 {
-  "extends": [
-    "airbnb",
-    "plugin:jsx-a11y/recommended",
-    "prettier"
-  ],
+  "root": true,
+  "parser": "@typescript-eslint/parser",
   "plugins": [
+    "@typescript-eslint",
     "jsx-a11y",
     "prettier"
   ],
+  "extends": [
+    "airbnb",
+    "plugin:jsx-a11y/recommended",
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
   "rules": {
     "semi": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx",".tsx"] }],
+    "@typescript-eslint/explicit-module-boundary-types":0,
     "prettier/prettier": [
       "error", {
-        "semi": false
+        "semi": false,
+        "no-console": false
       }
     ],
-    "react/react-in-jsx-scope": 0
+    "react/react-in-jsx-scope": 0,
+    "import/no-unresolved": 0
   }
 }

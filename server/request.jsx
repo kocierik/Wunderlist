@@ -35,22 +35,36 @@ const spotifyApi = new SpotifyWebApi({
 
 const app = express()
 app.use(cors())
-app.get("/login", (req, res) => {
+app.get("/login", (req, res ) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes))
 })
 
-app.get("/user",async (req,res) => {
+app.get("/user", async (req , res) => {
   const dataUser = await spotifyApi.getMe()
   console.log("dataUser", dataUser)
   res.send(dataUser)
 })
 
+app.get("/topTrack", async (req, res) => {
+  const topTrack = await spotifyApi.getMyTopTracks()
+  console.log("top track: ", topTrack)
+  res.send(topTrack)
+})
 
 app.get("/artist", async (req, res) => {
   const artist = await spotifyApi.getMyCurrentPlayingTrack()
   console.log("artist", artist)
   res.send(artist)
 })
+
+
+// interface DataCallBack {
+//   body : {
+//     access_token: string
+//     refresh_token: string
+//     expires_in: number
+//   }
+// }
 
 app.get("/callback", (req, res) => {
   const { error } = req.query

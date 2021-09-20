@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import {
   Button,
@@ -8,17 +9,37 @@ import {
   Grid,
   Typography,
 } from "@mui/material"
-// eslint-disable-next-line import/no-unresolved
+import axios from "axios"
+import { useState } from "react"
 import CardInfo from "./cardInfo"
+import { DataResponse } from "../types"
 import "../style/info.scss"
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const API_ENDPOINT = "http://localhost:8888/topTrack"
 function info() {
+  const [dataUserSpoti, setDataUserSpoti] = useState<DataResponse>({})
+
+  const handleTrack = async (tokenAuth: string) => {
+    axios
+      .get(API_ENDPOINT, {
+        headers: {
+          Authorizazion: `Bearer ${tokenAuth}`,
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response.data)
+        setDataUserSpoti(response.data as DataResponse)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   return (
     <div className="content_info">
       <Container sx={{ py: 8 }} maxWidth="md">
         <Grid container spacing={4}>
-          {/*  eslint-disable-next-line @typescript-eslint/ban-types */}
           {CardInfo.map((card) => (
             <Grid item key={card.id} xs={12} sm={12} md={12}>
               <Card
@@ -56,7 +77,9 @@ function info() {
                     justifyContent: "center",
                   }}
                 >
-                  <Button size="large">View</Button>
+                  <Button size="large" onClick={() => handleTrack}>
+                    View
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>
