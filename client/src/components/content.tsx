@@ -8,6 +8,7 @@ import { createUserProfileDocument } from "../firebase"
 import "../style/content.scss"
 import { tokenContext } from "../tokenContext"
 import { SpotifyLoginResponse } from "../types"
+import { userContext } from "../userContext"
 // eslint-disable-next-line import/no-unresolved
 import VisualizeData from "./VisualizeData"
 
@@ -50,23 +51,25 @@ const content = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [token, setToken] = useContext<any>(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [data, setData] = useState<SpotifyLoginResponse>({})
-
-  const handleTrack = async (tokenAuth: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [data, setData] = useContext<any>(userContext)
+  // const [data, setData] = useState<SpotifyLoginResponse>({})
+  const handleTrack = async (tokenAuth: string, API_ENDPOINT: string) => {
     axios
-      .get(USER_ENDPOINT, {
+      .get(API_ENDPOINT, {
         headers: {
           Authorizazion: `Bearer ${tokenAuth}`,
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
-        setData(response.data as SpotifyLoginResponse)
+        setData(response.data)
         const dataUser = {
           id: response.data.body.id,
           email: response.data.body.email,
           country: response.data.body.country,
           photoURL: response.data.body.images[0].url,
+          topTracks: [{}],
         }
         createUserProfileDocument(dataUser)
       })
@@ -89,7 +92,7 @@ const content = () => {
     if (window.location.hash) {
       const authURI = getReturnedParamsFromSpotifyAuth(window.location.hash)
       setToken(authURI.access_token)
-      handleTrack(authURI.access_token)
+      handleTrack(authURI.access_token, USER_ENDPOINT)
     }
   }, [])
 

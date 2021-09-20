@@ -15,12 +15,20 @@ import CardInfo from "./cardInfo"
 import { DataResponse } from "../types"
 import "../style/info.scss"
 import { tokenContext } from "../tokenContext"
+import { userContext } from "../userContext"
+import { auth, firestore } from "../firebase"
 
 const API_ENDPOINT = "http://localhost:8888/topTrack"
+
+interface TrackNameInterface {
+  name: { el: string }
+}
+
 function info() {
   const [dataUserSpoti, setDataUserSpoti] = useState<DataResponse>({})
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userToken, setUserToken] = useContext<any>(tokenContext)
+  const [user, setUser] = useContext<any>(userContext)
   const handleTrack = async (tokenAuth: string) => {
     axios
       .get(API_ENDPOINT, {
@@ -32,6 +40,10 @@ function info() {
       .then((response) => {
         console.log(response.data)
         setDataUserSpoti(response.data as DataResponse)
+        const userRef = firestore.doc(`users/${user.body.id}`)
+        const data = response.data.body.items
+        userRef.update({ topTracks: data })
+        console.log(user)
       })
       .catch((error) => {
         console.log(error)
