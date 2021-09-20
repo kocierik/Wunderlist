@@ -3,15 +3,21 @@
 import { useState } from "react"
 import axios from "axios"
 import { Button } from "@mui/material"
+// eslint-disable-next-line import/extensions
+import { SpotifyLoginResponse } from "../types"
 
 // const PLAYLIST_ENDPOINT = "http://localhost:8888/artist"
 const USER_ENDPOINT = "http://localhost:8888/user"
 
+type Props = {
+  token: string
+}
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const visualizeData = (props) => {
+const VisualizeData = ({ token }: Props) => {
   // eslint-disable-next-line no-unused-vars
-  const [data, setData] = useState({})
-  const token = localStorage.getItem("accessToken")
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [data, setData] = useState<SpotifyLoginResponse>({})
   const handleTrack = () => {
     axios
       .get(USER_ENDPOINT, {
@@ -19,7 +25,6 @@ const visualizeData = (props) => {
           Authorizazion: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        crossDomain: true,
       })
       .then((response) => {
         setData(response.data)
@@ -27,14 +32,13 @@ const visualizeData = (props) => {
       .catch((error) => {
         console.log(error)
       })
-    if (data.body !== undefined) console.log(data.body)
   }
 
   return (
     <Button onClick={handleTrack}>
-      {props.token.body !== undefined ? props.token.body.email : "ok"}
+      {data?.token?.body !== undefined ? data.token.body.email : "ok"}
     </Button>
   )
 }
 
-export default visualizeData
+export default VisualizeData

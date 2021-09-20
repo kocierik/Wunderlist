@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
@@ -5,7 +6,9 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { createUserProfileDocument } from "../firebase"
 import "../style/content.scss"
-import VisualizeData from "./visualizeData"
+import { SpotifyLoginResponse } from "../types"
+// eslint-disable-next-line import/no-unresolved
+import VisualizeData from "./VisualizeData"
 
 const { REACT_APP_CLIENT_ID } = process.env
 const { REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT } = process.env
@@ -21,33 +24,42 @@ const SCOPES = [
 ]
 const SCOPES_URL_PARAM = SCOPES.join("%20")
 
-const getReturnedParamsFromSpotifyAuth = (hash) => {
+interface Dict<T> {
+  [Key: string]: T
+}
+
+const getReturnedParamsFromSpotifyAuth = (hash: string) => {
   const stringAfterHashtag = hash.substring(1)
   const paraInUrl = stringAfterHashtag.split("&")
-  const paramSplitUp = paraInUrl.reduce((accumulater, currentValue) => {
-    const [key, value] = currentValue.split("=")
-    // eslint-disable-next-line no-param-reassign
-    accumulater[key] = value
-    return accumulater
-  }, {})
+
+  const paramSplitUp = paraInUrl.reduce(
+    (accumulater: Dict<string>, currentValue) => {
+      const [key, value] = currentValue.split("=")
+      // eslint-disable-next-line no-param-reassign
+      accumulater[key] = value
+      return accumulater
+    },
+    {}
+  )
   return paramSplitUp
 }
 
 const content = () => {
   const [sign, onSign] = useState(true)
-  const [data, setData] = useState({})
+  const [token, setToken] = useState<string | undefined>(undefined)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [data, setData] = useState<SpotifyLoginResponse>({})
 
-  const handleTrack = async (token) => {
+  const handleTrack = async (tokenAuth: string) => {
     axios
       .get(USER_ENDPOINT, {
         headers: {
-          Authorizazion: `Bearer ${token}`,
+          Authorizazion: `Bearer ${tokenAuth}`,
           "Content-Type": "application/json",
         },
-        crossDomain: true,
       })
       .then((response) => {
-        setData(response.data)
+        setData(response.data as SpotifyLoginResponse)
         const dataUser = {
           id: response.data.body.id,
           email: response.data.body.email,
@@ -61,19 +73,20 @@ const content = () => {
       })
   }
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     if (sign) {
       onSign(false)
       setData({})
     } else {
       onSign(true)
-      window.location = `${REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
+      window.location.href = `${REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
     }
   }
 
   useEffect(() => {
     if (window.location.hash) {
       const authURI = getReturnedParamsFromSpotifyAuth(window.location.hash)
+      setToken(authURI.access_token)
       handleTrack(authURI.access_token)
     }
   }, [])
@@ -87,7 +100,7 @@ const content = () => {
         }}
         p={0}
       >
-        <Container maxWidth="25%">
+        <Container>
           <Typography
             component="h2"
             variant="h2"
@@ -116,13 +129,12 @@ const content = () => {
           >
             <Button
               variant="contained"
-              bgcolor="white"
               sx={{ bgcolor: "#1DB954" }}
-              onClick={handleLogin}
+              onClick={() => handleLogin()}
             >
               {sign ? "log out" : "sign up with spotify"}
             </Button>
-            <VisualizeData token={data} />
+            {token && <VisualizeData token={token} />}
           </Stack>
         </Container>
       </Box>
