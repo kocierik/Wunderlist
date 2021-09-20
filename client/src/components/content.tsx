@@ -7,7 +7,6 @@ import { useContext, useEffect, useState } from "react"
 import { createUserProfileDocument } from "../firebase"
 import "../style/content.scss"
 import { tokenContext } from "../tokenContext"
-import { SpotifyLoginResponse } from "../types"
 import { userContext } from "../userContext"
 // eslint-disable-next-line import/no-unresolved
 import VisualizeData from "./VisualizeData"
