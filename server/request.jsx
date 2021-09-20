@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const SpotifyWebApi = require("spotify-web-api-node")
 const express = require("express")
 var cors = require('cors')
@@ -33,12 +32,19 @@ const spotifyApi = new SpotifyWebApi({
   clientSecret: process.env.CLIENT_SECRET,
 })
 
+
 const app = express()
 app.use(cors())
-
 app.get("/login", (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes))
 })
+
+app.get("/user",async (req,res) => {
+  const dataUser = await spotifyApi.getMe()
+  console.log("dataUser", dataUser)
+  res.send(dataUser)
+})
+
 
 app.get("/artist", async (req, res) => {
   const artist = await spotifyApi.getMyCurrentPlayingTrack()

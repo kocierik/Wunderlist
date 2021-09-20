@@ -22,7 +22,7 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "src/firebase.jsx"  ],
   "exclude": [
     "node_modules", "**/*.spec.ts"
   ]

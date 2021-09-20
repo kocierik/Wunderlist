@@ -4,17 +4,17 @@ import { useState } from "react"
 import axios from "axios"
 import { Button } from "@mui/material"
 
-const PLAYLIST_ENDPOINT = "http://localhost:8888/artist"
+// const PLAYLIST_ENDPOINT = "http://localhost:8888/artist"
+const USER_ENDPOINT = "http://localhost:8888/user"
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const visualizeData = () => {
+const visualizeData = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [data, setData] = useState({})
-
   const token = localStorage.getItem("accessToken")
   const handleTrack = () => {
     axios
-      .get(PLAYLIST_ENDPOINT, {
+      .get(USER_ENDPOINT, {
         headers: {
           Authorizazion: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -27,10 +27,14 @@ const visualizeData = () => {
       .catch((error) => {
         console.log(error)
       })
-    console.log(data)
+    if (data.body !== undefined) console.log(data.body)
   }
 
-  return <Button onClick={handleTrack}>get Artist</Button>
+  return (
+    <Button onClick={handleTrack}>
+      {props.token.body !== undefined ? props.token.body.email : "ok"}
+    </Button>
+  )
 }
 
 export default visualizeData
