@@ -3,9 +3,10 @@
 /* eslint-disable no-undef */
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
 import axios from "axios"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { createUserProfileDocument } from "../firebase"
 import "../style/content.scss"
+import { tokenContext } from "../tokenContext"
 import { SpotifyLoginResponse } from "../types"
 // eslint-disable-next-line import/no-unresolved
 import VisualizeData from "./VisualizeData"
@@ -46,7 +47,8 @@ const getReturnedParamsFromSpotifyAuth = (hash: string) => {
 
 const content = () => {
   const [sign, onSign] = useState(true)
-  const [token, setToken] = useState<string | undefined>(undefined)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [token, setToken] = useContext<any>(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = useState<SpotifyLoginResponse>({})
 

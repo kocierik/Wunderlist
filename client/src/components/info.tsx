@@ -10,15 +10,17 @@ import {
   Typography,
 } from "@mui/material"
 import axios from "axios"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import CardInfo from "./cardInfo"
 import { DataResponse } from "../types"
 import "../style/info.scss"
+import { tokenContext } from "../tokenContext"
 
 const API_ENDPOINT = "http://localhost:8888/topTrack"
 function info() {
   const [dataUserSpoti, setDataUserSpoti] = useState<DataResponse>({})
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [userToken, setUserToken] = useContext<any>(tokenContext)
   const handleTrack = async (tokenAuth: string) => {
     axios
       .get(API_ENDPOINT, {
@@ -77,7 +79,7 @@ function info() {
                     justifyContent: "center",
                   }}
                 >
-                  <Button size="large" onClick={() => handleTrack}>
+                  <Button size="large" onClick={() => handleTrack(userToken)}>
                     View
                   </Button>
                 </CardActions>
