@@ -12,11 +12,11 @@ import {
 import axios from "axios"
 import { useContext } from "react"
 import { useHistory } from "react-router"
-import CardInfo from "../cardInfo/cardInfo"
+import CardInfo from "./cardInfo/cardInfo"
 import "./index.scss"
 import { tokenContext } from "../../provider/tokenContext"
 import { userContext } from "../../provider/userContext"
-import { firestore } from "../../firebase"
+import { firestore } from "../../db/firebase"
 
 const API_ENDPOINT = "http://localhost:8888/topTrack"
 
@@ -25,7 +25,6 @@ function info() {
   const [userToken, setUserToken] = useContext<any>(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useContext<any>(userContext)
-  const history = useHistory()
   console.log(userToken)
   const handleTrack = async (tokenAuth: string) => {
     axios
@@ -36,6 +35,8 @@ function info() {
         },
       })
       .then((response) => {
+        const history = useHistory()
+
         const userRef = firestore.doc(`users/${user.body.id}`)
         const data = response.data.body.items
         userRef.update({ topTracks: data })

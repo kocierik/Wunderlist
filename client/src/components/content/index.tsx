@@ -4,7 +4,8 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
-import { createUserProfileDocument } from "../../firebase"
+import { useHistory } from "react-router"
+import { createUserProfileDocument } from "../../db/firebase"
 import "./index.scss"
 import { tokenContext } from "../../provider/tokenContext"
 import { userContext } from "../../provider/userContext"
@@ -47,6 +48,7 @@ const getReturnedParamsFromSpotifyAuth = (hash: string) => {
 
 const content = () => {
   const [sign, onSign] = useState(true)
+  const history = useHistory()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [token, setToken] = useContext<any>(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -81,6 +83,7 @@ const content = () => {
     if (sign) {
       onSign(false)
       setData("")
+      history.push("/")
     } else {
       onSign(true)
       window.location.href = `${REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
