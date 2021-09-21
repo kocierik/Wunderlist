@@ -80,7 +80,7 @@ const content = () => {
   const handleLogin = () => {
     if (sign) {
       onSign(false)
-      setData({})
+      setData("")
     } else {
       onSign(true)
       window.location.href = `${REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
@@ -138,7 +138,6 @@ const content = () => {
             >
               {sign ? "log out" : "sign up with spotify"}
             </Button>
-            {token && <VisualizeData token={token} />}
           </Stack>
         </Container>
       </Box>
