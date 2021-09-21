@@ -11,6 +11,7 @@ import {
 } from "@mui/material"
 import axios from "axios"
 import { useContext } from "react"
+import { useHistory } from "react-router"
 import CardInfo from "../cardInfo/cardInfo"
 import "./index.scss"
 import { tokenContext } from "../../provider/tokenContext"
@@ -24,6 +25,7 @@ function info() {
   const [userToken, setUserToken] = useContext<any>(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useContext<any>(userContext)
+  const history = useHistory()
   const handleTrack = async (tokenAuth: string) => {
     axios
       .get(API_ENDPOINT, {
@@ -38,6 +40,8 @@ function info() {
         userRef.update({ topTracks: data })
         console.log(response.data)
         console.log(user)
+        const path = `dashboard`
+        history.push(path)
       })
       .catch((error) => {
         console.log(error)
