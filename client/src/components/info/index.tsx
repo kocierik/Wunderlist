@@ -26,6 +26,7 @@ function info() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useContext<any>(userContext)
   const history = useHistory()
+  console.log(userToken)
   const handleTrack = async (tokenAuth: string) => {
     axios
       .get(API_ENDPOINT, {
@@ -85,13 +86,26 @@ function info() {
                 <CardActions
                   sx={{
                     flex: "0 1 20%",
-                    bgcolor: "#050F1E",
+                    bgcolor: "#110C0C",
+                    color: "#1976d2",
+                    fontSize: "15px",
                     justifyContent: "center",
                   }}
                 >
-                  <Button size="large" onClick={() => handleTrack(userToken)}>
-                    View
-                  </Button>
+                  {user !== "" ? (
+                    <Button size="large" onClick={() => handleTrack(userToken)}>
+                      View
+                    </Button>
+                  ) : (
+                    <Button
+                      size="medium"
+                      onClick={() =>
+                        window.scroll({ top: 0, left: 0, behavior: "smooth" })
+                      }
+                    >
+                      Login to see more
+                    </Button>
+                  )}
                 </CardActions>
               </Card>
             </Grid>
