@@ -1,4 +1,5 @@
 import { Box, Link, Typography } from "@mui/material"
+import "./index.scss"
 
 function Copyright() {
   return (

@@ -4,12 +4,12 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material"
 import axios from "axios"
 import { useContext, useEffect, useState } from "react"
-import { createUserProfileDocument } from "../firebase"
-import "../style/content.scss"
-import { tokenContext } from "../tokenContext"
-import { userContext } from "../userContext"
+import { createUserProfileDocument } from "../../firebase"
+import "./index.scss"
+import { tokenContext } from "../../provider/tokenContext"
+import { userContext } from "../../provider/userContext"
 // eslint-disable-next-line import/no-unresolved
-import VisualizeData from "./VisualizeData"
+import VisualizeData from "../visualizeData"
 
 const { REACT_APP_CLIENT_ID } = process.env
 const { REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT } = process.env

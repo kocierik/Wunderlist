@@ -4,7 +4,7 @@ import { useState } from "react"
 import axios from "axios"
 import { Button } from "@mui/material"
 // eslint-disable-next-line import/extensions
-import { SpotifyLoginResponse } from "../types"
+import { SpotifyLoginResponse } from "../../types"
 
 // const PLAYLIST_ENDPOINT = "http://localhost:8888/artist"
 const USER_ENDPOINT = "http://localhost:8888/user"

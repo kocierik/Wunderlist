@@ -11,11 +11,11 @@ import {
 } from "@mui/material"
 import axios from "axios"
 import { useContext } from "react"
-import CardInfo from "./cardInfo"
-import "../style/info.scss"
-import { tokenContext } from "../tokenContext"
-import { userContext } from "../userContext"
-import { firestore } from "../firebase"
+import CardInfo from "../cardInfo/cardInfo"
+import "./index.scss"
+import { tokenContext } from "../../provider/tokenContext"
+import { userContext } from "../../provider/userContext"
+import { firestore } from "../../firebase"
 
 const API_ENDPOINT = "http://localhost:8888/topTrack"
 
