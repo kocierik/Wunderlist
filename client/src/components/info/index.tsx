@@ -21,6 +21,7 @@ import { firestore } from "../../db/firebase"
 const API_ENDPOINT = "http://localhost:8888/topTrack"
 
 function info() {
+  const history = useHistory()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userToken, setUserToken] = useContext<any>(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -35,8 +36,6 @@ function info() {
         },
       })
       .then((response) => {
-        const history = useHistory()
-
         const userRef = firestore.doc(`users/${user.body.id}`)
         const data = response.data.body.items
         userRef.update({ topTracks: data })
