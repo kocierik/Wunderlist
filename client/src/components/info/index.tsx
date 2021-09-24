@@ -17,16 +17,16 @@ import "./index.scss"
 import { tokenContext } from "../../provider/tokenContext"
 import { userContext } from "../../provider/userContext"
 import { firestore } from "../../db/firebase"
+// import { SpotifyLoginResponse } from "../../types"
 
 const API_ENDPOINT = "http://localhost:8888/topTrack"
 
 function info() {
   const history = useHistory()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [userToken, setUserToken] = useContext<any>(tokenContext)
+  const [userToken, setUserToken] = useContext(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useContext<any>(userContext)
-  console.log(userToken)
   const handleTrack = async (tokenAuth: string) => {
     axios
       .get(API_ENDPOINT, {
@@ -92,7 +92,7 @@ function info() {
                     justifyContent: "center",
                   }}
                 >
-                  {user !== "" ? (
+                  {userToken !== "" ? (
                     <Button size="large" onClick={() => handleTrack(userToken)}>
                       View
                     </Button>

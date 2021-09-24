@@ -44,7 +44,7 @@ export const createUserProfileDocument = async (user, additionalData) => {
   // fetch document location
   const snapshot = await userRef.get()
   if (!snapshot.exists) {
-    const { id, email, country, photoURL } = user
+    const { id, email, country } = user
     const createAt = new Date()
     try {
       await userRef.set({
@@ -52,7 +52,7 @@ export const createUserProfileDocument = async (user, additionalData) => {
         email,
         country,
         createAt,
-        photoURL,
+        // photoURL,
         ...additionalData,
       })
     } catch (error) {
