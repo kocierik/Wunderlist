@@ -50,11 +50,11 @@ const content = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = useContext(userContext)
 
-  const handleTrack = async () => {
+  const handleTrack = async (authURI: string) => {
     try {
       const response = await fetch(USER_ENDPOINT, {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${authURI}`,
         },
       })
       const value = await response.json()
@@ -73,9 +73,10 @@ const content = () => {
   }
 
   const handleLogin = () => {
-    if (sign) {
+    if (token) {
       onSign(false)
-      setData("")
+      setToken("")
+      localStorage.removeItem("token")
       history.push("/")
     } else {
       onSign(true)
@@ -87,6 +88,7 @@ const content = () => {
       const authURI = getReturnedParamsFromSpotifyAuth(window.location.hash)
       setToken(authURI.access_token)
       localStorage.setItem("token", authURI.access_token)
+      handleTrack(authURI.access_token)
     }
     console.log(token)
   }, [window.location.hash])
@@ -141,14 +143,7 @@ const content = () => {
               sx={{ bgcolor: "#1DB954" }}
               onClick={() => handleLogin()}
             >
-              {sign ? "log out" : "sign up with spotify"}
-            </Button>
-            <Button
-              variant="contained"
-              sx={{ bgcolor: "#1DB954" }}
-              onClick={() => handleTrack()}
-            >
-              ciao
+              {token ? "log out" : "sign up with spotify"}
             </Button>
           </Stack>
         </Container>
