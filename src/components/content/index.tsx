@@ -8,6 +8,8 @@ import { createUserProfileDocument, firestore } from "../../db/firebase"
 import "./index.scss"
 import { tokenContext } from "../../provider/tokenContext"
 import { userContext } from "../../provider/userContext"
+import makeApiRequest from "../../utilitis/reqAPI"
+import getReturnedParamsFromSpotifyAuth from "../../utilitis/getParamUri"
 
 const { REACT_APP_CLIENT_ID } = process.env
 const { REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT } = process.env
@@ -23,47 +25,12 @@ const SCOPES = [
 ]
 const SCOPES_URL_PARAM = SCOPES.join("%20")
 
-interface Dict<T> {
-  [Key: string]: T
-}
-
-const getReturnedParamsFromSpotifyAuth = (hash: string) => {
-  const stringAfterHashtag = hash.substring(1)
-  const paraInUrl = stringAfterHashtag.split("&")
-
-  const paramSplitUp = paraInUrl.reduce(
-    (accumulater: Dict<string>, currentValue) => {
-      const [key, value] = currentValue.split("=")
-      // eslint-disable-next-line no-param-reassign
-      accumulater[key] = value
-      return accumulater
-    },
-    {}
-  )
-  return paramSplitUp
-}
-
 const content = () => {
   const [sign, onSign] = useState(true)
   const history = useHistory()
   const [token, setToken] = useContext(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = useContext(userContext)
-
-  const makeRandomApiRequest = async () => {
-    try {
-      const response = await fetch(TRACK_API, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      const res = await response.json()
-      return res.items
-    } catch (error) {
-      console.log(error)
-      return []
-    }
-  }
 
   const handleDataUser = async (authURI: string) => {
     try {
@@ -83,7 +50,7 @@ const content = () => {
       }
       setData(dataUser.id)
       await createUserProfileDocument(dataUser)
-      const tracklist = await makeRandomApiRequest()
+      const tracklist = await makeApiRequest(TRACK_API)
       const userRef = firestore.doc(`users/${dataUser.id}`)
       userRef.update({ topTracks: tracklist })
       const path = `dashboard`
@@ -104,7 +71,6 @@ const content = () => {
       window.location.href = `${REACT_APP_SPOTIFY_AUTHORIZE_ENDPOINT}?client_id=${REACT_APP_CLIENT_ID}&redirect_uri=${REACT_APP_REDIRECT_URL_AFTER_LOGIN}&scope=${SCOPES_URL_PARAM}&response_type=token&show_dialog=true`
     }
   }
-
 
   useEffect(() => {
     if (window.location.hash) {

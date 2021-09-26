@@ -13,3 +13,7 @@ export interface SpotifyLoginResponse {
 export interface DataResponse {
   artist?: string
 }
+
+export interface Dict<T> {
+  [Key: string]: T
+}
