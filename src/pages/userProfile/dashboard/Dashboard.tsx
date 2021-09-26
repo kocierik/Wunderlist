@@ -29,7 +29,7 @@ function Copyright(props: any) {
   return (
     <Typography
       variant="body2"
-      color="text.secondary"
+      color="white"
       align="center"
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
@@ -105,7 +105,7 @@ function DashboardContent() {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: "flex", bgcolor: "black", color: "white" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={open} sx={{ bgcolor: "#0B132B" }}>
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
@@ -162,7 +162,7 @@ function DashboardContent() {
           sx={{
             backgroundColor: (theme) =>
               theme.palette.mode === "dark"
-                ? theme.palette.grey[100]
+                ? theme.palette.grey[500]
                 : theme.palette.grey[900],
             flexGrow: 1,
             height: "100vh",
@@ -173,7 +173,7 @@ function DashboardContent() {
           <Container sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={2}>
               {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+              {/* <Grid item xs={12} md={8} lg={9}>
                 <Paper
                   sx={{
                     p: 2,
@@ -185,9 +185,9 @@ function DashboardContent() {
                 >
                   <Chart />
                 </Paper>
-              </Grid>
+              </Grid> */}
               {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
+              {/* <Grid item xs={12} md={4} lg={3}>
                 <Paper
                   sx={{
                     p: 2,
@@ -200,7 +200,7 @@ function DashboardContent() {
                 >
                   <Deposits />
                 </Paper>
-              </Grid>
+              </Grid> */}
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper

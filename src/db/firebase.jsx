@@ -21,7 +21,6 @@ firebase.initializeApp(firebaseConfig)
 export const firestore = firebase.firestore()
 export const auth = firebase.auth()
 export const storage = firebase.storage()
-
 // eslint-disable-next-line consistent-return
 export const getUserDocument = async (uid) => {
   if (!uid) return null
@@ -29,6 +28,7 @@ export const getUserDocument = async (uid) => {
     return await firestore.collection("users").doc(uid)
   } catch (error) {
     console.log("error fetching the data ", error.message)
+    return null
   }
 }
 
