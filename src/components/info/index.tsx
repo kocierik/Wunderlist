@@ -65,7 +65,12 @@ function info() {
                   }}
                 >
                   {userToken !== "" ? (
-                    "View"
+                    <Button
+                      size="medium"
+                      onClick={() => history.push("/dashBoard")}
+                    >
+                      View
+                    </Button>
                   ) : (
                     <Button
                       size="medium"

@@ -53,7 +53,7 @@ const content = () => {
       const tracklist = await makeApiRequest(TRACK_API)
       const userRef = firestore.doc(`users/${dataUser.id}`)
       userRef.update({ topTracks: tracklist })
-      const path = `dashboard`
+      const path = `/dashboard`
       history.push(path)
     } catch (error) {
       console.log(error)
