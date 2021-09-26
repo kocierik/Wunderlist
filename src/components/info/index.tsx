@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable import/extensions */
 import {
@@ -9,7 +10,6 @@ import {
   Grid,
   Typography,
 } from "@mui/material"
-import axios from "axios"
 import { useContext } from "react"
 import { useHistory } from "react-router"
 import CardInfo from "./cardInfo/cardInfo"
@@ -17,9 +17,8 @@ import "./index.scss"
 import { tokenContext } from "../../provider/tokenContext"
 import { userContext } from "../../provider/userContext"
 import { firestore } from "../../db/firebase"
-// import { SpotifyLoginResponse } from "../../types"
 
-const API_ENDPOINT = "http://localhost:8888/topTrack"
+const TRACK_API = "https://api.spotify.com/v1/me/top/tracks"
 
 function info() {
   const history = useHistory()
@@ -27,26 +26,25 @@ function info() {
   const [userToken, setUserToken] = useContext(tokenContext)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useContext<any>(userContext)
-  const handleTrack = async (tokenAuth: string) => {
-    axios
-      .get(API_ENDPOINT, {
+
+  const makeRandomApiRequest = async () => {
+    try {
+      const response = await fetch(TRACK_API, {
         headers: {
-          Authorizazion: `Bearer ${tokenAuth}`,
-          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((response) => {
-        const userRef = firestore.doc(`users/${user.body.id}`)
-        const data = response.data.body.items
-        userRef.update({ topTracks: data })
-        console.log(response.data)
-        console.log(user)
-        const path = `dashboard`
-        history.push(path)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+      const res = await response.json()
+      console.log(res)
+      console.log(user)
+      const userRef = firestore.doc(`users/${user.body.id}`)
+      const data = res.items
+      userRef.update({ topTracks: data })
+      const path = `dashboard`
+      history.push(path)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -93,7 +91,7 @@ function info() {
                   }}
                 >
                   {userToken !== "" ? (
-                    <Button size="large" onClick={() => handleTrack(userToken)}>
+                    <Button size="large" onClick={() => makeRandomApiRequest()}>
                       View
                     </Button>
                   ) : (
