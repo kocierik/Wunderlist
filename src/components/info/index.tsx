@@ -73,7 +73,7 @@ function info() {
                         window.scroll({ top: 0, left: 0, behavior: "smooth" })
                       }
                     >
-                      Login to see more
+                      See more
                     </Button>
                   )}
                 </CardActions>

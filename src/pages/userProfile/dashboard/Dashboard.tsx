@@ -103,7 +103,7 @@ function DashboardContent() {
 
   return (
     <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", bgcolor: "black", color: "white" }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
           <Toolbar
@@ -161,7 +161,7 @@ function DashboardContent() {
           component="main"
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === "light"
+              theme.palette.mode === "dark"
                 ? theme.palette.grey[100]
                 : theme.palette.grey[900],
             flexGrow: 1,
@@ -170,8 +170,8 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
+          <Container sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={2}>
               {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
                 <Paper
@@ -180,6 +180,7 @@ function DashboardContent() {
                     display: "flex",
                     flexDirection: "column",
                     height: 240,
+                    bgcolor: "#0B132B",
                   }}
                 >
                   <Chart />
@@ -193,6 +194,8 @@ function DashboardContent() {
                     display: "flex",
                     flexDirection: "column",
                     height: 240,
+                    bgcolor: "#0B132B", /// AAA,
+                    color: "white",
                   }}
                 >
                   <Deposits />
@@ -200,7 +203,15 @@ function DashboardContent() {
               </Grid>
               {/* Recent Orders */}
               <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    bgcolor: "#0B132B",
+                    color: "white",
+                  }}
+                >
                   <Orders />
                 </Paper>
               </Grid>
