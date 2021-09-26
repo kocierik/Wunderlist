@@ -13,9 +13,7 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/extensions
-import { border } from "@mui/material/node_modules/@mui/system"
-import Title from "./Title"
-import { getUserDocument, firestore } from "../../../db/firebase"
+import { firestore } from "../../../db/firebase"
 import { userContext } from "../../../provider/userContext"
 
 interface trackInterface {
