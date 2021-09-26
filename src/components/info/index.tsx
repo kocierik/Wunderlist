@@ -15,37 +15,11 @@ import { useHistory } from "react-router"
 import CardInfo from "./cardInfo/cardInfo"
 import "./index.scss"
 import { tokenContext } from "../../provider/tokenContext"
-import { userContext } from "../../provider/userContext"
-import { firestore } from "../../db/firebase"
-
-const TRACK_API = "https://api.spotify.com/v1/me/top/tracks"
 
 function info() {
   const history = useHistory()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [userToken, setUserToken] = useContext(tokenContext)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [user, setUser] = useContext<any>(userContext)
-
-  const makeRandomApiRequest = async () => {
-    try {
-      const response = await fetch(TRACK_API, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      const res = await response.json()
-      console.log(res)
-      console.log(user)
-      const userRef = firestore.doc(`users/${user.body.id}`)
-      const data = res.items
-      userRef.update({ topTracks: data })
-      const path = `dashboard`
-      history.push(path)
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   return (
     <div className="content_info">
@@ -91,9 +65,7 @@ function info() {
                   }}
                 >
                   {userToken !== "" ? (
-                    <Button size="large" onClick={() => makeRandomApiRequest()}>
-                      View
-                    </Button>
+                    "View"
                   ) : (
                     <Button
                       size="medium"
