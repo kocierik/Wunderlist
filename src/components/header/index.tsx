@@ -6,7 +6,7 @@ import "./index.scss"
 function header() {
   return (
     <div className="header">
-      <AppBar position="relative" sx={{ bgcolor: "transparent" }}>
+      <AppBar position="fixed" sx={{ bgcolor: "transparent" }}>
         <Toolbar style={{ justifyContent: "right" }}>
           <Home style={{ cursor: "pointer" }} />
           <Typography variant="h6" noWrap />

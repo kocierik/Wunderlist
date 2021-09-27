@@ -13,8 +13,9 @@ import TableHead from "@mui/material/TableHead"
 import TableRow from "@mui/material/TableRow"
 // eslint-disable-next-line import/extensions
 // eslint-disable-next-line import/extensions
+import { Box } from "@mui/material"
 import { firestore } from "../../../db/firebase"
-import { userContext } from "../../../provider/userContext"
+import Title from "./Title"
 
 interface trackInterface {
   album: {
@@ -35,19 +36,12 @@ interface trackInterface {
 }
 
 export default function Orders() {
-  const [user, setUser] = React.useContext(userContext)
   const [tracks, setTracks] = React.useState([])
 
   const getUserData = async () => {
     try {
-      const id = sessionStorage.getItem("userID")
+      const id = localStorage.getItem("userID")
       if (!id) return
-      if (!user) {
-        setUser(id)
-      } else {
-        sessionStorage.setItem("userID", user)
-      }
-
       const trackRef = firestore.collection("users").doc(id)
       const trackList = await (await trackRef.get()).data()
       setTracks(trackList?.topTracks)
@@ -67,8 +61,8 @@ export default function Orders() {
     event.preventDefault()
   }
   return (
-    <>
-      {/* <Title>Recent Orders</Title> */}
+    <Box paddingTop={5}>
+      <Title>Recent Orders</Title>
       <Table size="medium">
         <TableHead>
           <TableRow sx={{ border: "solid green" }}>
@@ -99,6 +93,6 @@ export default function Orders() {
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
         See more orders
       </Link>
-    </>
+    </Box>
   )
 }

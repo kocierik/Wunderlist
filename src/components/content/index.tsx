@@ -40,6 +40,7 @@ const content = () => {
         },
       })
       const value = await response.json()
+      localStorage.setItem("userID", value.id)
       console.log(value)
       const dataUser = {
         id: value.id,
@@ -65,6 +66,7 @@ const content = () => {
       onSign(false)
       setToken("")
       localStorage.removeItem("token")
+      localStorage.removeItem("userID")
       history.push("/")
     } else {
       onSign(true)

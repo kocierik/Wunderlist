@@ -1,16 +1,16 @@
 /* eslint-disable import/extensions */
 // eslint-disable-next-line no-use-before-define
 import * as React from "react"
-import { createTheme, ThemeProvider } from "@mui/material/styles"
-import Box from "@mui/material/Box"
+import Home from "@mui/icons-material/Home"
 import Toolbar from "@mui/material/Toolbar"
 import Typography from "@mui/material/Typography"
 import Container from "@mui/material/Container"
 import Grid from "@mui/material/Grid"
 import Paper from "@mui/material/Paper"
 import Link from "@mui/material/Link"
+import { AppBar, IconButton } from "@mui/material"
 import Orders from "./Orders"
-
+import "./dashboard.scss"
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function Copyright(props: any) {
   return (
@@ -30,76 +30,61 @@ function Copyright(props: any) {
   )
 }
 
-const mdTheme = createTheme()
-
 function DashboardContent() {
   return (
-    <ThemeProvider theme={mdTheme}>
-      <Box sx={{ display: "flex", bgcolor: "black", color: "white" }}>
-        <Box
-          component="main"
+    <>
+      <AppBar position="fixed">
+        <Toolbar
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "dark"
-                ? theme.palette.grey[500]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
+            pr: "24px", // keep right padding when drawer closed
+            bgcolor: "#150d0d",
           }}
         >
-          <Toolbar />
-          <Container sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={2}>
-              {/* Chart */}
-              {/* <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                    bgcolor: "#0B132B",
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid> */}
-              {/* Recent Deposits */}
-              {/* <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                    bgcolor: "#0B132B", /// AAA,
-                    color: "white",
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid> */}
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    bgcolor: "#0B132B",
-                    color: "white",
-                  }}
-                >
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ pt: 4 }} />
-          </Container>
-        </Box>
-      </Box>
-    </ThemeProvider>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{
+              marginRight: "36px",
+            }}
+          />
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            sx={{ flexGrow: 1 }}
+          >
+            Dashboard
+          </Typography>
+          <IconButton color="inherit">
+            <Home
+              onClick={() =>
+                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+              }
+            />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Container sx={{ mt: 4, mb: 4 }}>
+        <Grid container spacing={2}>
+          {/* Recent Orders */}
+          <Grid item xs={12}>
+            <Paper
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                bgcolor: "transparent",
+                color: "white",
+              }}
+            >
+              <Orders />
+            </Paper>
+          </Grid>
+        </Grid>
+        <Copyright sx={{ pt: 4 }} />
+      </Container>
+    </>
   )
 }
 
