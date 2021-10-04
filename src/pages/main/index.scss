@@ -4,7 +4,7 @@
   flex: 1 1 auto;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   flex-direction: column;
-  background-image: url(../../static/img/image.jpeg);
+  background: linear-gradient(#000000, #580a0a);
   background-size: contain;
   background-size: 100% 100%;
 }
@@ -13,4 +13,5 @@
   display: flex;
   flex: 0 1 auto;
   flex-direction: column;
+  justify-content: center;
 }

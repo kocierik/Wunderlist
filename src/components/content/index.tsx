@@ -97,7 +97,7 @@ const content = () => {
     <div className="content">
       <Box
         sx={{
-          pt: 8,
+          pt: 25,
           pb: 50,
         }}
         p={0}
