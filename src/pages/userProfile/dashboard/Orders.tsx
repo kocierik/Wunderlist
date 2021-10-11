@@ -5,7 +5,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // eslint-disable-next-line no-use-before-define
 import * as React from "react"
-import Link from "@mui/material/Link"
 import Table from "@mui/material/Table"
 import TableBody from "@mui/material/TableBody"
 import TableCell from "@mui/material/TableCell"
@@ -57,9 +56,6 @@ export default function Orders() {
     getUserData()
   }, [])
 
-  function preventDefault(event: React.MouseEvent) {
-    event.preventDefault()
-  }
   return (
     <Box paddingTop={5}>
       <Title>Recent Orders</Title>
