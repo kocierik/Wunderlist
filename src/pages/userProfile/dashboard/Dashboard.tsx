@@ -60,7 +60,7 @@ function DashboardContent() {
           <IconButton color="inherit">
             <Home
               onClick={() =>
-                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+                window.location.assign("https://wunderlistt.netlify.app/")
               }
             />
           </IconButton>
